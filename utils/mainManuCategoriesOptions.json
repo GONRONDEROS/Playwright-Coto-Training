@@ -1,0 +1,9 @@
+[
+    {
+        "menuCategory"      : " Almacén ",
+        "category"          : "Panaderia",
+        "particularCategory": "Panificados",
+        "specificCatefory"  : [" Molde ", " Baguette ", " Mignon "]
+    }
+
+]
