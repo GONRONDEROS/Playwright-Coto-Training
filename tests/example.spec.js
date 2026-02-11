@@ -1,4 +1,4 @@
-// @ts-check
+
 import { test, expect } from '@playwright/test';
 import { APIProducts } from '../utils/APIProducts';
 const {MainMenuBar} = require('../pageobjects/mainMenoPageObject');
@@ -15,23 +15,24 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
   await mainMenuBar.hoverCategoryMenu(data.menuCategory);
   await mainMenuBar.selectAndNavigateToParticularCategory(data.category, data.particularCategory);
   expect(page.url()).toContain(data.particularCategory.toLowerCase());
-
+  
   if(data.moreParticularCategory){
     await productPage.clickFiltroDeProductos(data.moreParticularCategory);
     for(const option of data.specificCategory){
-    
     const url = await productPage.clickFiltroDeProductos(option);
+    const nf = await productPage.getCanonicalNf();
     const apiProducts = new APIProducts(url.split('?')[0]);
-    const products = await apiProducts.listProducts();
+    const products = await apiProducts.listProducts({ nf });
     console.log(products);
     await page.goBack();
     }
   } else {
-  for(const option of data.specificCatefory){
+  for(const option of data.specificCategory){
     
     const url = await productPage.clickFiltroDeProductos(option);
+    const nf = await productPage.getCanonicalNf();
     const apiProducts = new APIProducts(url.split('?')[0]);
-    const products = await apiProducts.listProducts();
+    const products = await apiProducts.listProducts({ nf });
     console.log(products);
     await page.goBack();
   }

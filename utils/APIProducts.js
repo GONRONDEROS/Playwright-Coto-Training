@@ -6,16 +6,15 @@ class APIProducts {
         this.baseUrl = baseUrl;
     }
 
-    async listProducts(nrpp = 3000) {
+    async listProducts({ nf } = {}) {
         const context = await request.newContext();
-
         const params = new URLSearchParams({
-            Nf: 'product.endDate|GTEQ 1.7705952E12||product.startDate|LTEQ 1.7705952E12',
             No: '0',
             Nr: 'AND(product.language:español,product.sDisp_200:1004,OR(product.siteId:CotoDigital))',
-            Nrpp: nrpp.toString(),
+            Nrpp: '1000',
             format: 'json'
         });
+        if (nf) { params.set('Nf', nf); }
 
         const cleanBaseUrl = this.baseUrl.split('?')[0];
         const url = `${cleanBaseUrl}?${params.toString()}`;

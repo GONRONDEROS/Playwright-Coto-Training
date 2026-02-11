@@ -12,6 +12,26 @@ class ProductsPage{
         return this.page.url();
     }
 
+async getCanonicalNf() { 
+    let nfValue = null; 
+    this.page.on('response', async (response) => { 
+        const url = response.url(); 
+        if (url.includes('/categoria/catalogo')) { 
+            try { 
+                const body = await response.json(); 
+                const navState = body?.canonicalLink?.navigationState; 
+                const nfMatch = navState?.match(/Nf=([^&]+)/); 
+                if (nfMatch) { 
+                    nfValue = decodeURIComponent(nfMatch[1]);
+                } 
+            } catch (e) { 
+            } 
+        } 
+    }); 
+    return nfValue; 
+}
+
+
     async hayMasDeUnaPagina(){
         return await this.page.locator('li > .ng-star-inserted:has-text("2")').count() > 0;
     }
