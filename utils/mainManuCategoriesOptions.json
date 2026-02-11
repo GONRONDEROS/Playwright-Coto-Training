@@ -4,6 +4,12 @@
         "category"          : "Panaderia",
         "particularCategory": "Panificados",
         "specificCatefory"  : [" Molde ", " Baguette ", " Mignon "]
+    },
+    {
+        "menuCategory"      : " Almacén ",
+        "category"          : "Panaderia",
+        "particularCategory": "Galletitas",
+        "specificCatefory"  : [" Molde ", " Baguette ", " Mignon "]
     }
 
 ]

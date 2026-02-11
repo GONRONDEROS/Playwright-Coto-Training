@@ -7,12 +7,8 @@ class ProductsPage{
     async clickFiltroDeProductos(product){
         await this.page.locator(`a[title="${product.trim()}"]`).click();
         await this.page.waitForURL(new RegExp(`${(product.trim()).toLowerCase()}`));
-        // Capturás la URL actual después de la navegación
+        // Capturar la URL actual despues de la navegación
         return this.page.url();
-    }
-
-    async volverAProductoMadre(product){
-        
     }
 
     async hayMasDeUnaPagina(){

@@ -11,7 +11,7 @@ class APIProducts {
 
         const params = new URLSearchParams({
             Nf: 'product.endDate|GTEQ 1.7705952E12||product.startDate|LTEQ 1.7705952E12',
-            No: '24',
+            No: '0',
             Nr: 'AND(product.language:español,product.sDisp_200:1004,OR(product.siteId:CotoDigital))',
             Nrpp: nrpp.toString(),
             format: 'json'
@@ -30,34 +30,23 @@ class APIProducts {
         return this.parseProducts(body);
     }
 
-    parseProducts(body) {
-        const productos = [];
-        const records = body?.contents?.[0]?.Main?.[2]?.contents?.[0]?.records || [];
-
+    parseProducts(body) { 
+        const productos = []; 
+        const records = body?.contents?.[0]?.Main?.[2]?.contents?.[0]?.records || []; 
         for (const record of records) {
-            // Caso Baguette: atributos en el record principal
-            const nombreDirecto = record?.attributes?.["product.displayName"] || record?.attributes?.["product.description"];
-            const precioDirecto = record?.attributes?.["sku.referencePrice"];
-            if (nombreDirecto && precioDirecto) {
-                productos.push({ nombre: nombreDirecto, precio: precioDirecto });
-            }
-
-            // Caso Molde: atributos en subRecords
-            const subRecords = record?.records || [];
-            for (const subRecord of subRecords) {
-                const nombre = subRecord?.attributes?.["product.displayName"] || subRecord?.attributes?.["product.description"];
-                const precio = subRecord?.attributes?.["sku.referencePrice"];
-                if (nombre && precio) {
-                    productos.push({ nombre, precio });
-                }
-            }
-        }
-
-        if (productos.length === 0) {
-            console.log("Categoría sin productos o estructura distinta");
-        }
-
-        return productos;
+            const subRecords = record?.records || []; 
+            for (const subRecord of subRecords) { 
+                const nombre = subRecord?.attributes?.["product.displayName"] || subRecord?.attributes?.["product.description"] || nombrePadre; 
+                const precio = subRecord?.attributes?.["sku.referencePrice"] || subRecord?.attributes?.["sku.activePrice"] || precioPadre; 
+                if (nombre && precio) { 
+                    productos.push({ nombre, precio }); 
+                } 
+            } 
+        } 
+        if (productos.length === 0) { 
+            console.log("Categoría sin productos o estructura distinta"); 
+        } 
+        return productos; 
     }
 }
 
