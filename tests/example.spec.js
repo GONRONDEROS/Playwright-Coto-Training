@@ -18,7 +18,7 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
 
   if(data.moreParticularCategory){
     await productPage.clickFiltroDeProductos(data.moreParticularCategory);
-    for(const option of data.specificCatefory){
+    for(const option of data.specificCategory){
     
     const url = await productPage.clickFiltroDeProductos(option);
     const apiProducts = new APIProducts(url.split('?')[0]);
