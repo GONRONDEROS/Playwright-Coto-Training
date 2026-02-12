@@ -1,3 +1,4 @@
+const {encodeCategoryName} = require('../utils/helpers');
 class MainMenuBar{
     constructor(page){
         this.page = page;
@@ -9,9 +10,12 @@ class MainMenuBar{
     }
 
     async selectAndNavigateToParticularCategory(category, particularCategory){
-        await this.page.locator( `ul:has(> a:has-text("${category}")) >> li >> a:has-text("${particularCategory}")` ).click();
-        await this.page.waitForURL(new RegExp(`${particularCategory.trim().toLowerCase().replace(/\s+/g, '-')}`));
-
+        const normalizedUrl = encodeCategoryName(particularCategory);
+        Promise.all([
+            this.page.waitForURL(new RegExp(normalizedUrl)),
+            this.page.locator( `ul:has(> a:has-text("${category}")) >> li >> a:has-text("${particularCategory}")` ).click()
+        ])
+        return this.page.url();
     }
 }
 module.exports = {MainMenuBar}

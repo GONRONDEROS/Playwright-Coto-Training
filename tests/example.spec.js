@@ -4,6 +4,7 @@ import { APIProducts } from '../utils/APIProducts';
 const {MainMenuBar} = require('../pageobjects/mainMenoPageObject');
 const {ProductsPage} = require('../pageobjects/productsPage');
 const dataSet = JSON.parse(JSON.stringify(require('../utils/mainManuCategoriesOptions.json')));
+const {encodeCategoryName} = require('../utils/helpers');
 
 for (const data of dataSet){
 test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.moreParticularCategory}"`, async ({ page }) => {
@@ -14,12 +15,12 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
 
   await mainMenuBar.hoverCategoryMenu(data.menuCategory);
   await mainMenuBar.selectAndNavigateToParticularCategory(data.category, data.particularCategory);
-  expect(page.url()).toMatch(new RegExp(`${data.particularCategory.trim().toLowerCase().replace(/\s+/g, '-')}`));
   
   if(data.moreParticularCategory){
     await productPage.clickFiltroDeProductos(data.moreParticularCategory);
     for(const option of data.specificCategory){
     const url = await productPage.clickFiltroDeProductos(option);
+    expect(page.url()).toMatch(url);
     const nf = await productPage.getCanonicalNf();
     const apiProducts = new APIProducts(url.split('?')[0]);
     const products = await apiProducts.listProducts({ nf });
@@ -28,6 +29,7 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
     }
   } else if(data.onlyCategory) {
     const url = await productPage.onlyCategoryMethod(data.onlyCategory);
+    expect(page.url()).toMatch(url);
     const nf = await productPage.getCanonicalNf();
     const apiProducts = new APIProducts(url.split('?')[0]);
     const products = await apiProducts.listProducts({ nf });
@@ -36,6 +38,7 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
   } else {
     for(const option of data.specificCategory){
     const url = await productPage.clickFiltroDeProductos(option);
+    expect(page.url()).toMatch(url);
     const nf = await productPage.getCanonicalNf();
     const apiProducts = new APIProducts(url.split('?')[0]);
     const products = await apiProducts.listProducts({ nf });

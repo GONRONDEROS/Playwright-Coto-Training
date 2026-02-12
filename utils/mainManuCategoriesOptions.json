@@ -29,7 +29,36 @@
         "category"              : "Harinas",
         "particularCategory"    : "Harina De Trigo",
         "onlyCategory"          : " Harina De Trigo "
+    },
+    {
+        "menuCategory"          : " Almacén ",
+        "category"              : "Harinas",
+        "particularCategory"    : "Harina De Maíz",
+        "onlyCategory"          : " Harina De Maíz "
+    },
+    {
+        "menuCategory"          : " Almacén ",
+        "category"              : "Pasta Seca, Lista Y Rellenas",
+        "particularCategory"    : "Pastas Secas",
+        "onlyCategory"          : " Pastas Secas "
+    },
+    {
+        "menuCategory"          : " Almacén ",
+        "category"              : "Endulzantes",
+        "particularCategory"    : "Azúcar",
+        "onlyCategory"          : " Azúcar "
+    },
+    {
+        "menuCategory"          : " Almacén ",
+        "category"              : "Mermeladas Y Dulces",
+        "particularCategory"    : "Mermeladas",
+        "onlyCategory"          : " Mermeladas "
+    },
+    {
+        "menuCategory"          : " Frescos ",
+        "category"              : "Lácteos",
+        "particularCategory"    : "Dulce De Leche",
+        "onlyCategory"          : " Dulce De Leche "
     }
-
 ]
 
