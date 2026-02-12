@@ -12,6 +12,13 @@ class ProductsPage{
         return this.page.url();
     }
 
+async onlyCategoryMethod(product){
+    const normalized = product.trim().toLowerCase().replace(/\s+/g, '-');
+    await this.page.waitForURL(new RegExp(normalized));
+    // Capturar la URL actual despues de la navegación
+    return this.page.url();
+}
+
 async getCanonicalNf() { 
     let nfValue = null; 
     this.page.on('response', async (response) => { 

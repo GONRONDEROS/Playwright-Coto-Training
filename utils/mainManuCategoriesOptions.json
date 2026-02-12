@@ -17,6 +17,18 @@
         "category"              : "Panaderia",
         "particularCategory"    : "Galletitas",
         "specificCategory"      : [" Galletitas Dulces "]
+    },
+    {
+        "menuCategory"          : " Almacén ",
+        "category"              : "Arroz Y Legumbres",
+        "particularCategory"    : "Arroz",
+        "specificCategory"      : [" Arroz "]
+    },
+    {
+        "menuCategory"          : " Almacén ",
+        "category"              : "Harinas",
+        "particularCategory"    : "Harina De Trigo",
+        "onlyCategory"          : " Harina De Trigo "
     }
 
 ]

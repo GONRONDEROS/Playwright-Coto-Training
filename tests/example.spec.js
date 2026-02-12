@@ -14,7 +14,7 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
 
   await mainMenuBar.hoverCategoryMenu(data.menuCategory);
   await mainMenuBar.selectAndNavigateToParticularCategory(data.category, data.particularCategory);
-  expect(page.url()).toContain(data.particularCategory.toLowerCase());
+  expect(page.url()).toMatch(new RegExp(`${data.particularCategory.trim().toLowerCase().replace(/\s+/g, '-')}`));
   
   if(data.moreParticularCategory){
     await productPage.clickFiltroDeProductos(data.moreParticularCategory);
@@ -26,9 +26,15 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
     console.log(products);
     await page.goBack();
     }
+  } else if(data.onlyCategory) {
+    const url = await productPage.onlyCategoryMethod(data.onlyCategory);
+    const nf = await productPage.getCanonicalNf();
+    const apiProducts = new APIProducts(url.split('?')[0]);
+    const products = await apiProducts.listProducts({ nf });
+    console.log(products);
+    await page.goBack();
   } else {
-  for(const option of data.specificCategory){
-    
+    for(const option of data.specificCategory){
     const url = await productPage.clickFiltroDeProductos(option);
     const nf = await productPage.getCanonicalNf();
     const apiProducts = new APIProducts(url.split('?')[0]);

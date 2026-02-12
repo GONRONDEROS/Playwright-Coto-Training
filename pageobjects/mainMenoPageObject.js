@@ -10,7 +10,7 @@ class MainMenuBar{
 
     async selectAndNavigateToParticularCategory(category, particularCategory){
         await this.page.locator( `ul:has(> a:has-text("${category}")) >> li >> a:has-text("${particularCategory}")` ).click();
-        await this.page.waitForURL(new RegExp(`${particularCategory.toLowerCase()}`));
+        await this.page.waitForURL(new RegExp(`${particularCategory.trim().toLowerCase().replace(/\s+/g, '-')}`));
 
     }
 }
