@@ -11,9 +11,9 @@ class MainMenuBar{
 
     async selectAndNavigateToParticularCategory(category, particularCategory){
         const normalizedUrl = encodeCategoryName(particularCategory);
-        Promise.all([
+        await Promise.all([
             this.page.waitForURL(new RegExp(normalizedUrl)),
-            this.page.locator( `ul:has(> a:has-text("${category}")) >> li >> a:has-text("${particularCategory}")` ).click()
+            this.page.locator( `ul:has(> a:has-text("${category}")) >> li >> a:has-text("${particularCategory}")` ).first().click()
         ])
         return this.page.url();
     }

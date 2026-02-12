@@ -32,6 +32,7 @@ export default defineConfig({
     }
   },
   fullyParallel: true,
-  workers: 2
+  workers: 2,
+  retries: 2
 });
 

@@ -1,4 +1,17 @@
 [
+    
+    {
+        "menuCategory"          : " Almacén ",
+        "category"              : "Aderezos Y Salsas",
+        "particularCategory"    : "Mayonesas",
+        "onlyCategory"          : " Mayonesas "
+    },
+    {
+        "menuCategory"          : " Almacén ",
+        "category"              : "Aceites Y Condimentos",
+        "particularCategory"    : "Condimentos",
+        "specificCategory"      : [" Sal "]
+    },
     {
         "menuCategory"          : " Almacén ",
         "category"              : "Panaderia",
@@ -59,6 +72,37 @@
         "category"              : "Lácteos",
         "particularCategory"    : "Dulce De Leche",
         "onlyCategory"          : " Dulce De Leche "
+    },
+    {
+        "menuCategory"          : " Frescos ",
+        "category"              : "Carniceria",
+        "particularCategory"    : "Carnes",
+        "specificCategory"      : [" Bovinos ", " Porcinos ", " Menudencias "]
+    },
+    {
+        "menuCategory"          : " Frescos ",
+        "category"              : "Fiambres",
+        "particularCategory"    : "Fiambres",
+        "specificCategory"      : [" Paleta Cocida ", " Salame "]
+    },
+    {
+        "menuCategory"          : " Frescos ",
+        "category"              : "Huevos",
+        "particularCategory"    : "Huevos Blanco",
+        "onlyCategory"          : " Huevos Blanco "
+    },
+    {
+        "menuCategory"          : " Frescos ",
+        "category"              : "Lácteos",
+        "particularCategory"    : "Leches",
+        "onlyCategory"          : " Leches "
+    },
+    {
+        "menuCategory"          : " Frescos ",
+        "category"              : "Lácteos",
+        "particularCategory"    : "Yogures",
+        "onlyCategory"          : " Yogures "
     }
+
 ]
 
