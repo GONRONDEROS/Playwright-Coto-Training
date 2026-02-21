@@ -21,27 +21,24 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
     for(const option of data.specificCategory){
     const url = await productPage.clickFiltroDeProductos(option);
     expect(page.url()).toMatch(url);
-    const nf = await productPage.getCanonicalNf();
     const apiProducts = new APIProducts(url.split('?')[0]);
-    const products = await apiProducts.listProducts({ nf });
+    const products = await apiProducts.listProducts();
     console.log(products);
     await page.goBack();
     }
   } else if(data.onlyCategory) {
     const url = await productPage.onlyCategoryMethod(data.onlyCategory);
     expect(page.url()).toMatch(url);
-    const nf = await productPage.getCanonicalNf();
     const apiProducts = new APIProducts(url.split('?')[0]);
-    const products = await apiProducts.listProducts({ nf });
+    const products = await apiProducts.listProducts();
     console.log(products);
     await page.goBack();
   } else {
     for(const option of data.specificCategory){
     const url = await productPage.clickFiltroDeProductos(option);
     expect(page.url()).toMatch(url);
-    const nf = await productPage.getCanonicalNf();
     const apiProducts = new APIProducts(url.split('?')[0]);
-    const products = await apiProducts.listProducts({ nf });
+    const products = await apiProducts.listProducts();
     console.log(products);
     await page.goBack();
   }

@@ -21,24 +21,5 @@ class ProductsPage{
         // Capturar la URL actual despues de la navegación
         return this.page.url();
     }
-
-    async getCanonicalNf() { 
-        let nfValue = null; 
-        this.page.on('response', async (response) => { 
-            const url = response.url(); 
-            if (url.includes('/categoria/catalogo')) { 
-                try { 
-                    const body = await response.json(); 
-                    const navState = body?.canonicalLink?.navigationState; 
-                    const nfMatch = navState?.match(/Nf=([^&]+)/); 
-                    if (nfMatch) { 
-                        nfValue = decodeURIComponent(nfMatch[1]);
-                    } 
-                } catch (e) { 
-                } 
-            } 
-        }); 
-    return nfValue; 
-    }
 }
 module.exports = {ProductsPage}
