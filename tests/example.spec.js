@@ -1,10 +1,12 @@
 
 import { test, expect } from '@playwright/test';
 import { APIProducts } from '../utils/APIProducts';
+import {exportToExcel} from '../utils/helpers';
 const {MainMenuBar} = require('../pageobjects/mainMenoPageObject');
 const {ProductsPage} = require('../pageobjects/productsPage');
 const dataSet = JSON.parse(JSON.stringify(require('../utils/mainManuCategoriesOptions.json')));
-const {encodeCategoryName} = require('../utils/helpers');
+const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+
 
 for (const data of dataSet){
 test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.moreParticularCategory}"`, async ({ page }) => {
@@ -24,6 +26,7 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
     const apiProducts = new APIProducts(url.split('?')[0]);
     const products = await apiProducts.listProducts();
     console.log(products);
+    exportToExcel(products, `${data.category}-${data.particularCategory}-${data.moreParticularCategory}-${timestamp}.xlsx`);
     await page.goBack();
     }
   } else if(data.onlyCategory) {
@@ -32,6 +35,7 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
     const apiProducts = new APIProducts(url.split('?')[0]);
     const products = await apiProducts.listProducts();
     console.log(products);
+    exportToExcel(products, `${data.category}-${data.particularCategory}-${data.moreParticularCategory}-${timestamp}.xlsx`);
     await page.goBack();
   } else {
     for(const option of data.specificCategory){
@@ -40,6 +44,7 @@ test(`Navegar a "${data.category}", "${data.particularCategory}", "${data.morePa
     const apiProducts = new APIProducts(url.split('?')[0]);
     const products = await apiProducts.listProducts();
     console.log(products);
+    exportToExcel(products, `${data.category}-${data.particularCategory}-${data.moreParticularCategory}-${timestamp}.xlsx`);
     await page.goBack();
   }
 }})
